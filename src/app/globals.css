@@ -18,12 +18,16 @@
 }
 
 /* Apply the font globally or to specific elements */
-body {
+/* body {
   @apply min-h-screen bg-gradient-to-b from-midnight to-navy;
   margin: 0;
   font-family: 'Inter', sans-serif; /* Default font */
+/* } */ 
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Default font */
+  min-height: 100vh; /* Remove the gradient from here */
 }
-
 h1, h2, h3, h4, h5, h6 {
   font-family: 'ParryHotter', sans-serif; /* Apply ParryHotter to headings */
 }

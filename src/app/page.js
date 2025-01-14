@@ -1,13 +1,17 @@
 'use client';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
-
+import SparkleEffect from '@/components/SparkleEffect';
+import FloatingCandles from '@/components/FloatingCandles';
+import AboutModal from '@/components/AboutModal';
+import Projects from './portfolio/page';
 export default function HomePage() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [showAboutModal, setShowAboutModal] = useState(false);
+  const [showProjectsModal, setShowProjectsModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +22,10 @@ export default function HomePage() {
   };
 
   return (
+    <div className="min-h-screen bg-gradient-to-b from-midnight to-navy">
+    <div className="stars-bg">
+    <SparkleEffect />
+    <FloatingCandles />
     <div className="relative min-h-screen">
       <main className="min-h-screen flex flex-col items-center justify-center p-8 text-center relative z-10">
         <motion.div
@@ -41,12 +49,20 @@ export default function HomePage() {
           </div>
 
           <div className="flex justify-center items-center space-x-8">
-            <Link href="/about" className="magical-button inline-block">
-              About Me
-            </Link>
-            <Link href="/portfolio" className="magical-button inline-block">
+          <button 
+            onClick={() => setShowAboutModal(true)} 
+            className="magical-button inline-block"
+          >
+            About Me
+          </button>
+          <button 
+              onClick={() => setShowProjectsModal(true)} 
+              className="magical-button inline-block"
+            >
               View my projects
-            </Link>
+            </button>
+
+
             <button
               onClick={() => setShowContactModal(true)}
               className="magical-button inline-block"
@@ -57,6 +73,41 @@ export default function HomePage() {
         </motion.div>
 
         <AnimatePresence>
+        {showProjectsModal && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 50 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 50 }}
+        className="relative w-[90%] max-w-2xl max-h-[600px] rounded-xl overflow-hidden"
+      >
+        <div 
+          className="relative bg-cover bg-center"
+          style={{ backgroundImage: "url('/assets/parchment_bg.jpg')" }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="p-6"
+          >
+            <button
+              onClick={() => setShowProjectsModal(false)} // Close the Projects modal
+              className="absolute top-4 right-4 text-3xl text-[#2A1810] hover:text-[var(--hogwarts-gold)] transition-colors"
+            >
+              ×
+            </button>
+            <Projects onClose={() => setShowProjectsModal(false)} />
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
           {showContactModal && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -148,7 +199,13 @@ export default function HomePage() {
             </motion.div>
           )}
         </AnimatePresence>
+        <AboutModal 
+          isOpen={showAboutModal} 
+          onClose={() => setShowAboutModal(false)} 
+        />
       </main>
+    </div>
+    </div>
     </div>
   );
 }

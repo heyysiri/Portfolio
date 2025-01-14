@@ -1,95 +1,170 @@
-// app/about/page.jsx
-'use client';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-export default function AboutPage() {
-  const [isFlipped, setIsFlipped] = useState(false);
+'use client'
+import { useState, useEffect } from 'react';
+import { Sparkles, Scroll, Book, Trophy, GraduationCap } from 'lucide-react';
+
+const AboutPage = () => {
+  const [activeSection, setActiveSection] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="font-[ParryHotter] text-5xl text-center text-[var(--hogwarts-gold)] mb-12">
-        The Wizard Behind the Magic
-      </h1>
-
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Chocolate Frog Card */}
-        <div 
-          className="perspective-1000 cursor-pointer"
-          onClick={() => setIsFlipped(!isFlipped)}
-        >
-          <motion.div
-            className="relative w-full h-[500px] transform-style-3d transition-transform duration-500"
-            animate={{ rotateY: isFlipped ? 180 : 0 }}
-          >
-            {/* Front of card */}
-            <div className="absolute w-full h-full backface-hidden bg-[var(--parchment)] rounded-xl p-6 border-4 border-[var(--hogwarts-gold)]">
-            <Image
-                src="/assets/pfp.jpg" // Path to your image
-                alt="Wizard Portrait" // Accessible description
-                width={1024} // Define the desired width in pixels
-                height={256} // Define the desired height in pixels (aspect ratio: w-full and h-64 in Tailwind)
-                className="object-cover rounded-lg mb-4" // Custom styles
-                priority // Preloads the image for better LCP
-            />
-              <h2 className="font-[ParryHotter] text-3xl text-center text-midnight mb-4">
-                [Your Name]
-              </h2>
-              <p className="text-center text-midnight">
-                Master of Digital Sorcery
-              </p>
-            </div>
-
-            {/* Back of card */}
-            <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-[var(--parchment)] rounded-xl p-6 border-4 border-[var(--hogwarts-gold)]">
-              <div className="text-midnight">
-                <h3 className="font-[ParryHotter] text-2xl mb-4">Biography</h3>
-                <p className="mb-4">
-                  A passionate developer with expertise in crafting magical digital experiences.
-                  Specializing in frontend enchantments and backend sorcery.
-                </p>
-                <ul className="list-disc list-inside">
-                  <li>Graduate of Digital Wizardry</li>
-                  <li>3+ Years of Magical Development</li>
-                  <li>Expert in React Spellcasting</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Skills Scroll */}
-        <div className="bg-[url('/assets/parchment.png')] p-8 rounded-xl">
-          <h3 className="font-[ParryHotter] text-3xl text-midnight mb-6">
-            Magical Abilities
-          </h3>
-          
-          {skills.map((skill, index) => (
-            <div key={index} className="mb-4">
-              <div className="flex justify-between text-midnight mb-2">
-                <span>{skill.name}</span>
-                <span>{skill.level}%</span>
-              </div>
-              <div className="h-4 bg-midnight/20 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: index * 0.2 }}
-                  className="h-full bg-[var(--hogwarts-gold)]"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Image - Replace src with your image */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-[#2A1810] opacity-80" />
+        {/* Add your background image here */}
+        <div className="absolute inset-0 bg-[url('/assets/parchment_bg.jpg')] bg-cover bg-center" />
       </div>
-    </main>
-  );
-}
 
-const skills = [
-  { name: 'Frontend Enchantments', level: 90 },
-  { name: 'Backend Sorcery', level: 85 },
-  { name: 'Database Potions', level: 80 },
-  { name: 'UI/UX Charms', level: 88 },
-  { name: 'API Spellcasting', level: 85 },
-];
+      {/* Floating Elements */}
+      {[...Array(15)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-2 h-2 opacity-50"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            transform: `translate(${(mousePosition.x * 0.02) * (i % 3)}px, ${(mousePosition.y * 0.02) * (i % 3)}px)`,
+            transition: 'transform 0.3s ease-out',
+            background: 'radial-gradient(circle, #FFD700 0%, transparent 70%)',
+          }}
+        />
+      ))}
+
+      <main className="relative z-10 container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <div className="flex flex-col items-center mb-16 transform translate-y-0 transition-transform duration-1000">
+          <div className="relative">
+            <h1 className="text-6xl md:text-8xl font-serif text-[#8B4513] mb-4 text-center relative">
+              <span className="relative inline-block">
+                Magical Portfolio
+                <Sparkles 
+                  className="absolute -top-8 -right-8 text-[#DAA520]" 
+                  style={{
+                    transform: `rotate(${scrollPosition * 0.1}deg)`,
+                  }}
+                />
+              </span>
+            </h1>
+            <p className="text-2xl text-[#8B4513] text-center font-serif italic">
+              Where Code Meets Magic
+            </p>
+          </div>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* About Section */}
+          <div 
+            className={`relative p-8 rounded-lg transform transition-all duration-500 hover:scale-105 hover:z-20 
+              ${activeSection === 'about' ? 'scale-105 z-20' : ''}`}
+            style={{
+              background: 'rgba(139, 69, 19, 0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '2px solid #8B4513',
+            }}
+            onMouseEnter={() => setActiveSection('about')}
+            onMouseLeave={() => setActiveSection(null)}
+          >
+            <Scroll className="w-12 h-12 text-[#8B4513] mb-4" />
+            <h2 className="text-3xl font-serif text-[#8B4513] mb-4">The Story</h2>
+            <p className="text-[#A0522D] leading-relaxed">
+              A passionate code wizard crafting digital spells and enchantments. 
+              Like a seeker chasing the golden snitch, I pursue elegant solutions 
+              with unwavering determination.
+            </p>
+          </div>
+
+          {/* Skills Section */}
+          <div 
+            className={`relative p-8 rounded-lg transform transition-all duration-500 hover:scale-105 hover:z-20
+              ${activeSection === 'skills' ? 'scale-105 z-20' : ''}`}
+            style={{
+              background: 'rgba(139, 69, 19, 0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '2px solid #8B4513',
+            }}
+            onMouseEnter={() => setActiveSection('skills')}
+            onMouseLeave={() => setActiveSection(null)}
+          >
+            <Book className="w-12 h-12 text-[#8B4513] mb-4" />
+            <h2 className="text-3xl font-serif text-[#8B4513] mb-4">Spell Book</h2>
+            <div className="space-y-4">
+              {['Frontend Charms', 'Backend Alchemy', 'Database Potions', 'Design Transfiguration'].map((skill, index) => (
+                <div 
+                  key={skill}
+                  className="relative overflow-hidden rounded p-2"
+                  style={{
+                    background: `rgba(139, 69, 19, ${0.1 + (index * 0.05)})`,
+                  }}
+                >
+                  <div className="relative z-10 text-[#A0522D] font-serif">
+                    {skill}
+                  </div>
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-r from-transparent to-[#DAA520] opacity-20"
+                    style={{
+                      transform: `translateX(${mousePosition.x * 0.02}px)`,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Achievements Section */}
+          <div 
+            className={`relative p-8 rounded-lg transform transition-all duration-500 hover:scale-105 hover:z-20
+              ${activeSection === 'achievements' ? 'scale-105 z-20' : ''}`}
+            style={{
+              background: 'rgba(139, 69, 19, 0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '2px solid #8B4513',
+            }}
+            onMouseEnter={() => setActiveSection('achievements')}
+            onMouseLeave={() => setActiveSection(null)}
+          >
+            <Trophy className="w-12 h-12 text-[#8B4513] mb-4" />
+            <h2 className="text-3xl font-serif text-[#8B4513] mb-4">Magical Feats</h2>
+            <div className="space-y-4">
+              {[
+                'Created 3 Legendary Apps',
+                'Mastered 5 Programming Languages',
+                'Led Team of 10 Wizards',
+                'Published in Developers Daily'
+              ].map((achievement, index) => (
+                <div 
+                  key={achievement}
+                  className="flex items-center space-x-2"
+                >
+                  <span className="text-[#DAA520] text-2xl">⚡</span>
+                  <span className="text-[#A0522D] font-serif">{achievement}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default AboutPage;
