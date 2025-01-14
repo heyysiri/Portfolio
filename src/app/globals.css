@@ -17,12 +17,6 @@
   font-style: normal;
 }
 
-/* Apply the font globally or to specific elements */
-/* body {
-  @apply min-h-screen bg-gradient-to-b from-midnight to-navy;
-  margin: 0;
-  font-family: 'Inter', sans-serif; /* Default font */
-/* } */ 
 body {
   margin: 0;
   font-family: 'Inter', sans-serif; /* Default font */

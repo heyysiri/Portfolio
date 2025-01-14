@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import { motion } from 'framer-motion';
-import { Scroll, Book, Trophy, GraduationCap } from 'lucide-react';
-
+import { Scroll, Book, Trophy, Code, Database } from 'lucide-react';
+import Image from 'next/image';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 const AboutModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -18,7 +19,7 @@ const AboutModal = ({ isOpen, onClose }) => {
         exit={{ scale: 0.9, y: 50 }}
         className="relative w-[90%] max-w-4xl rounded-xl overflow-hidden max-h-[90vh]"
       >
-        <div 
+        <div
           className="relative bg-cover bg-center"
           style={{ backgroundImage: "url('/assets/parchment_bg.jpg')" }}
         >
@@ -35,85 +36,70 @@ const AboutModal = ({ isOpen, onClose }) => {
               ×
             </button>
 
-            <h1 className="font-[ParryHotter] text-5xl text-center text-[#2A1810] mb-8">
-              About The Wizard
+            <h1 className="font-[ParryHotter] text-5xl text-center text-amber-900 mb-8">
+              About Me
             </h1>
 
             <div className="space-y-8">
-              {/* Story Section */}
+              {/* About Me Section */}
               <div className="bg-white/30 rounded-lg p-6 border-2 border-[#2A1810]/30">
                 <Scroll className="w-8 h-8 text-[#2A1810] mb-4" />
-                <h2 className="text-2xl font-[ParryHotter] text-[#2A1810] mb-4">The Story</h2>
-                <p className="text-[#2A1810] leading-relaxed">
-                  A passionate code wizard crafting digital spells and enchantments. 
-                  Like a seeker chasing the golden snitch, I pursue elegant solutions 
-                  with unwavering determination.
+                <p className="text-amber-900/90 leading-relaxed">
+                I am a 3rd-year undergraduate student in Computer Science with a deep passion for solving real-world problems through technology. As a huge Potterhead, I decided to infuse my love for the wizarding world into my portfolio, which explains the magical theme. In addition to my academic journey, I have won two hackathons, including an international one, where I had the chance to work with talented teams to bring innovative ideas to life. Outside of tech, I enjoy playing chess and listening to music!
                 </p>
               </div>
 
               {/* Skills Section */}
               <div className="bg-white/30 rounded-lg p-6 border-2 border-[#2A1810]/30">
                 <Book className="w-8 h-8 text-[#2A1810] mb-4" />
-                <h2 className="text-2xl font-[ParryHotter] text-[#2A1810] mb-4">Spell Book</h2>
+                <h2 className="text-2xl font-serif text-[#2A1810] mb-4">Skill Set</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    'Frontend Enchantments',
-                    'Backend Sorcery',
-                    'Database Potions',
-                    'UI/UX Transfiguration',
-                    'API Alchemy',
-                    'Testing Divination'
+                    'MERN Stack',
+                    'Next.js',
+                    'Flask',
+                    'Docker',
+                    'Flutter',
+                    'MySQL',
+                    'SQLite',
+                    'TailwindCSS'
                   ].map((skill) => (
-                    <div 
+                    <div
                       key={skill}
                       className="flex items-center space-x-2 p-2 bg-white/20 rounded"
                     >
                       <span className="text-[var(--hogwarts-gold)]">⚡</span>
-                      <span className="text-[#2A1810]">{skill}</span>
+                      <span className="text-amber-900/90">{skill}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Achievements Section */}
+              {/* Certifications Section */}
               <div className="bg-white/30 rounded-lg p-6 border-2 border-[#2A1810]/30">
                 <Trophy className="w-8 h-8 text-[#2A1810] mb-4" />
-                <h2 className="text-2xl font-[ParryHotter] text-[#2A1810] mb-4">Magical Feats</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {[
-                    'Created 3 Legendary Apps',
-                    'Mastered 5 Programming Languages',
-                    'Led Team of 10 Wizards',
-                    'Published in Developers Daily'
-                  ].map((achievement) => (
-                    <div 
-                      key={achievement}
-                      className="flex items-center space-x-2 p-2 bg-white/20 rounded"
-                    >
-                      <span className="text-[var(--hogwarts-gold)]">🏆</span>
-                      <span className="text-[#2A1810]">{achievement}</span>
-                    </div>
-                  ))}
+                <h2 className="text-2xl font-serif text-[#2A1810] mb-4">Certifications</h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-lg text-amber-900/90 font-serif">Google Cloud Computing Foundations and Generative AI certification</h3>
+                  </div>
+                  <div>
+                    <h3 className="text-lg text-amber-900/90 font-serif">J.P. Morgan - Software Engineering Job Simulation certification</h3>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white/30 rounded-lg p-6 border-2 border-[#2A1810]/30">
+                <h2 className="text-2xl font-serif text-[#2A1810] mb-4">Connect With Me</h2>
+                <div className="flex space-x-4 justify-center">
+                  <a href="https://github.com/heyysiri" target="_blank" rel="noopener noreferrer" className="text-amber-900/90 hover:text-[var(--hogwarts-gold)] transition-colors">
+                  <FaGithub size={32} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/siri-karra" target="_blank" rel="noopener noreferrer" className="text-amber-900/90 hover:text-[var(--hogwarts-gold)] transition-colors">
+                  <FaLinkedin size={32} />
+                  </a>
                 </div>
               </div>
 
-              {/* Education Section */}
-              <div className="bg-white/30 rounded-lg p-6 border-2 border-[#2A1810]/30">
-                <GraduationCap className="w-8 h-8 text-[#2A1810] mb-4" />
-                <h2 className="text-2xl font-[ParryHotter] text-[#2A1810] mb-4">Magical Education</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl text-[#2A1810] font-semibold">School of Digital Sorcery</h3>
-                    <p className="text-[#2A1810]/80">Master of Computer Magic</p>
-                    <p className="text-[#2A1810]/60">2020 - 2024</p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl text-[#2A1810] font-semibold">Code Wizardry Academy</h3>
-                    <p className="text-[#2A1810]/80">Advanced Spellcasting Certification</p>
-                    <p className="text-[#2A1810]/60">2023</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

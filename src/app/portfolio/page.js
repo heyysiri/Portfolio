@@ -1,32 +1,36 @@
 'use client';
-
 import React from 'react';
 
 const projects = [
   {
-    title: "Marauder's Map Web App",
-    description: "A real-time location tracking system inspired by the magical Marauder's Map. Solemnly swear that you're up to monitoring user positions with interactive floor plans!",
-    techStack: ["Next.js", "Socket.io", "MongoDB", "SVG Animations"]
+    title: "GenAI Remote Sensing",
+    description: "Created an AI-driven solution for environmental and agricultural challenges, using cutting-edge deep learning models to enhance crop classification, flood detection, and SAR image colorization. A game-changing approach for remote sensing!",
+    github: "https://github.com/heyysiri/genai-remote-sensing",
+    techStack: ["Flutter", "Flask", "Deep Learning models", "Docker"]
   },
   {
-    title: "Hogwarts Library Catalog",
-    description: "Madam Pince would be proud! A digital catalog system for magical books and scrolls, complete with whispers from the restricted section.",
-    techStack: ["React", "GraphQL", "PostgreSQL", "Auth0"]
+    title: "SKANA - Skill Gap Analyzer and Upskill Recommendation Tool",
+    description: "Developed a tool to connect job seekers' skills with market demands, offering personalized upskilling paths and seamless job placement support with a responsive frontend and scalable backend.",
+    github: "https://github.com/heyysiri/SKANA",
+    techStack: ["React.js", "TailwindCSS", "Flask", "MongoDB"]
   },
   {
-    title: "Spell Recognition API",
-    description: "Wingardium Levi-OS-a! A magical API that recognizes wand movements through your webcam. Practice your spells without breaking your monitor!",
-    techStack: ["TensorFlow.js", "Python", "FastAPI", "WebRTC"]
+    title: "AI/ML powered chatbot for Namami Gange Programme",
+    description: "Led the development of an AI-powered chatbot designed to inform and educate the public about the Namami Gange Programme, leveraging Rasa for NLP and enhancing response accuracy for a smoother user experience",
+    github: "https://github.com/heyysiri/NamamiGange",
+    techStack: ["React.js", "CSS","Rasa", "SQLite"]
   },
   {
-    title: "Quidditch Score Tracker",
-    description: "Keep track of your Quidditch matches like a professional commentator! Lee Jordan would definitely use this for his match broadcasts.",
-    techStack: ["Next.js", "Firebase", "Tailwind CSS", "React Query"]
+    title: "Vitaria: Your AI-Powered Nutrition Companion",
+    description: "Built an AI-driven platform that personalizes meal planning to align with your dietary goals and taste preferences. By leveraging generative AI, it crafts tailored meal suggestions, simplifying the process of maintaining a healthy diet amidst a busy lifestyle. Vitaria aims to transform meal planning into an effortless and enjoyable experience.",
+    github: "https://github.com/heyysiri/vitaria",
+    techStack: ["React Native", "Node.js", "Express.js", "MongoDB"]
   },
   {
-    title: "Potions Inventory System",
-    description: "Professor Snape's dream inventory system! Track your ingredients, brewing schedules, and never let your Wolfsbane Potion expire again.",
-    techStack: ["React", "Node.js", "MySQL", "Redux"]
+    title: "Retro Harry Potter fansite",
+    description: "Being the Potterhead that I am, I created a retro-inspired Harry Potter fan site featuring a mini-game, spell cards, and character cards, all wrapped in a nostalgic, magical vibe. A perfect treat for fellow wizards and witches!",
+    github: "https://github.com/heyysiri/Arcade-Of-Azkaban",
+    techStack: ["React.js", "TailwindCSS"]
   }
 ];
 
@@ -34,7 +38,7 @@ export default function Projects({ onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-75" onClick={onClose}></div>
+      <div className="absolute inset-0 bg-transparent" onClick={onClose}></div>
       
       {/* Scrollable Popup */}
       <div className="relative max-h-[90vh] w-full max-w-5xl overflow-auto bg-cover rounded-xl p-6 md:p-8"
@@ -60,7 +64,7 @@ export default function Projects({ onClose }) {
             textShadow: '2px 2px 4px rgba(139, 115, 85, 0.3), -1px -1px 0 rgba(255, 255, 255, 0.8)'
           }}
         >
-          Magical Projects Portfolio
+          Projects Portfolio
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
@@ -92,7 +96,7 @@ export default function Projects({ onClose }) {
               >
                 {/* Title */}
                 <h2 
-                  className="text-xl md:text-2xl font-serif text-amber-900 pb-3 group-hover:text-amber-800 transition-all duration-300"
+                  className="text-xl md:text-2xl font-serif text-[#2A1810] pb-3 group-hover:text-amber-800 transition-all duration-300"
                   style={{ textShadow: '1px 1px 0 rgba(255, 255, 255, 0.5)' }}
                 >
                   {project.title}
@@ -102,11 +106,16 @@ export default function Projects({ onClose }) {
                 <p className="text-amber-900/90 mb-6 font-medium leading-relaxed text-sm md:text-base">
                   {project.description}
                 </p>
+                <p className="text-[#2A1810] mb-6 font-medium leading-relaxed text-sm md:text-base underline">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      GitHub Repository
+                  </a>
 
+                </p>
                 {/* Tech Stack */}
                 <div className="space-y-3">
                   <h3 className="font-serif text-amber-900 font-semibold text-sm md:text-base">
-                    Magical Technologies Used:
+                    Tech Stack:
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, techIndex) => (

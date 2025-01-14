@@ -6,6 +6,8 @@ import SparkleEffect from '@/components/SparkleEffect';
 import FloatingCandles from '@/components/FloatingCandles';
 import AboutModal from '@/components/AboutModal';
 import Projects from './portfolio/page';
+import emailjs from 'emailjs-com';
+import { FaGithub} from 'react-icons/fa';
 export default function HomePage() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [sending, setSending] = useState(false);
@@ -16,9 +18,20 @@ export default function HomePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setSending(false);
-    setSent(true);
+  
+    try {
+      await emailjs.sendForm(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        e.target,
+        'YOUR_USER_ID'
+      );
+      setSending(false);
+      setSent(true);
+    } catch (error) {
+      console.error('Failed to send email', error);
+      setSending(false);
+    }
   };
 
   return (
@@ -37,7 +50,15 @@ export default function HomePage() {
           <h1 className="text-6xl text-[var(--hogwarts-gold)] mb-6">
             Welcome to the Wizarding World of Siri Karra
           </h1>
-          
+          <a
+            href="https://github.com/heyysiri/Portfolio" // Replace with your GitHub profile URL
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-8 right-8 text-lg text-[var(--hogwarts-gold)] hover:text-amber-500 transition-colors"
+          >
+            <FaGithub size={32} />
+          </a>
+
           <div className="mb-12 relative w-48 h-48 mx-auto">
             <Image
               src="/assets/crest.svg"
@@ -138,8 +159,8 @@ export default function HomePage() {
                       ×
                     </button>
 
-                    <h1 className="font-[ParryHotter] text-5xl text-center text-[#2A1810] mb-6">
-                      Send an Owl
+                    <h1 className="font-[ParryHotter] text-5xl text-center  text-amber-900 mb-6">
+                      Send an Email
                     </h1>
 
                     <form 
@@ -147,7 +168,7 @@ export default function HomePage() {
                       className="space-y-4"
                     >
                       <div>
-                        <label className="block text-[#2A1810] font-semibold mb-2 text-lg">Your Name</label>
+                        <label className="block text-amber-900/90 font-semibold mb-2 text-lg">Your Name</label>
                         <input
                           type="text"
                           required
@@ -158,7 +179,7 @@ export default function HomePage() {
                       </div>
 
                       <div>
-                        <label className="block text-[#2A1810] font-semibold mb-2 text-lg">Your Email</label>
+                        <label className="block text-amber-900/90 font-semibold mb-2 text-lg">Your Email</label>
                         <input
                           type="email"
                           required
@@ -169,7 +190,7 @@ export default function HomePage() {
                       </div>
 
                       <div>
-                        <label className="block text-[#2A1810] font-semibold mb-2 text-lg">Your Message</label>
+                        <label className="block text-amber-900/90 font-semibold mb-2 text-lg">Your Message</label>
                         <textarea
                           required
                           rows={4}

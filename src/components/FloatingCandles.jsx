@@ -32,7 +32,7 @@ const Candle = ({ delay, x }) => (
 
 export default function FloatingCandles() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-40">
+    <div className="fixed inset-0 pointer-events-none z-10">
       {Array.from({ length: 15 }).map((_, i) => (
         <Candle
           key={i}
